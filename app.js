@@ -1,5 +1,11 @@
 "use strict";
-
+// person writing code 
+// 1. git add .
+// 2. git commit -m "put the message here"
+// 3. git push 
+// now you are ready for your partner to do a pull and then they can take controll and write code
+// after partner pushes you will run 
+// git pull
 //Menu functions.
 //Used for the overall flow of the application.
 /////////////////////////////////////////////////////////////////
