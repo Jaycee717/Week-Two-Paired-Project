@@ -14,7 +14,7 @@
 // app is the function called to start the entire application
 function app(people) {
   let searchType = promptFor(
-    "Do you know the name of the person you are looking for? Enter 'yes' or 'no'",
+    "Do you know the name you are looking for? Enter 'yes' or 'no'",
     yesNo
   ).toLowerCase();
   let searchResults;
@@ -23,6 +23,7 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case "no":
+      searchResults = searchByEyeColor(people)
       // TODO: search by traits
       break;
     default:
@@ -51,6 +52,7 @@ function mainMenu(person, people) {
       " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'",
     autoValid
   );
+  
 
   switch (displayOption) {
     case "info":
@@ -95,12 +97,26 @@ function searchByName(people) {
     }
   });
   // TODO: find the person single person object using the name they entered.
-  return foundPerson;
+  console.log(foundPerson)
+  return foundPerson[0];
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-function searchByEyeColor(people) {}
+function searchByEyeColor(people) {
+ let personEyeColor = promptFor("What is the person's eye color?" , autoValid);
 
+ let eyeColor = people.filter(function (potentialMatch) {
+    if (
+      potentialMatch.eyeColor === personEyeColor
+      )
+      {
+      return true;
+    } else {
+      return false;
+    }
+  })
+  return eyeColor
+}
 //TODO: add other trait filter functions here.
 
 //#endregion
@@ -126,6 +142,7 @@ function displayPerson(person) {
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "eyeColor"+ personEyeColor + "/n";
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
@@ -145,7 +162,7 @@ function promptFor(question, valid) {
   let isValid;
   let response;
   do {
-    response = prompt(question).trim();
+    response = prompt(question).trim(); 
     isValid = valid(response);
   } while (response === "" || isValid === false);
   return response;
@@ -170,4 +187,4 @@ function autoValid(input) {
 //can be used for things like eye color validation for example.
 function customValidation(input) {}
 
-//#endregion
+//{#endregion}
