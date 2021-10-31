@@ -12,7 +12,10 @@
 //#region
 
 // app is the function called to start the entire application
-function app(people) {
+function app(people){
+ //let billy = findPersonById(272822514); 
+ //mainMenu(billy, people);
+ //return;
   let searchType = promptFor(
     "Do you know the name you are looking for? Enter 'yes' or 'no'",
     yesNo
@@ -56,9 +59,11 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
+      displayPersonInfo(person);
       // TODO: get person's info
       break;
     case "family":
+      displayPersonFamily(person, people);
       // TODO: get person's family
       break;
     case "descendants":
@@ -74,6 +79,25 @@ function mainMenu(person, people) {
   }
 }
 
+function displayPersonFamily(person, people){
+  let parents = person.parents.map((id)=>findById(id,people)); 
+  if (parents.length > 0) {
+    displayPeople(parents)
+  }else{alert('This person has no parents.')}
+}
+
+function searchById (id, people){
+  let found = people.find(function(person){
+    if (person.id === id){
+      return true;
+    } else {return false;}
+  });
+  return found;
+}
+
+function findById(id, people) {
+  return people.find((person) => person.id == id);
+}
 //#endregion
 
 //Filter functions.
@@ -175,6 +199,11 @@ function yesNo(input) {
   } else {
     return false;
   }
+}
+
+function displayPersonInfo(person){
+  let info = `eyeColor = ${person.eyeColor}, gender = ${person.gender} height = ${person.height} weight = ${person.weight} occupation = ${person.occupation}, birth = ${person.dob}`;
+  alert(info);
 }
 
 // helper function to pass in as default promptFor validation.
